@@ -13,7 +13,7 @@ class WCAccountChildTab
         add_action('woocommerce_account_children_endpoint', [$this, 'display_children_manager']);
         add_action('woocommerce_account_addchild_endpoint', [$this, 'display_addchild']);
         add_action('woocommerce_account_editchild_endpoint', [$this, 'display_editchild']);
-        add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
+        //add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
         add_action('rwmb_frontend_after_process', [$this, 'attach_user_as_parent'], 10, 2);
         add_filter('rwmb_frontend_validate', [$this, 'validate'], 10, 2);
     }
@@ -128,10 +128,12 @@ class WCAccountChildTab
 
     public function enqueue_scripts()
     {
+        /*
         if(is_account_page())
         {
-            wp_register_style('child_form_css',WP_PLUGIN_URL.'/sportinginfluence/dist/css/child_form_css.min.css');
-            wp_enqueue_style('child_form_css');
+            //wp_register_style('child_form_css',WP_PLUGIN_URL.'/sportinginfluence/dist/css/child_form_css.min.css');
+            //wp_enqueue_style('child_form_css');
         }
+        */
     }
 }

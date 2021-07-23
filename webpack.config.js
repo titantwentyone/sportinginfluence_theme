@@ -9,6 +9,7 @@ module.exports = {
         //main: './index.js',
         homepage: { import: './src/styles/homepage.scss'},
         generic: { import: './src/styles/generic.scss'},
+        calendar: { import: './src/styles/calendar.scss'},
         offcanvas: { import: './src/js/offcanvas.js'}
     },
     target: 'web',

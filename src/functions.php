@@ -2,6 +2,11 @@
 
 require("vendor/autoload.php");
 
+//add_filter( 'woocommerce_enqueue_styles', '__return_empty_array' );
+
+//@see https://wordpress.org/support/topic/call-to-undefined-function-get_current_screen-6/
+require_once(ABSPATH . 'wp-admin/includes/screen.php');
+
 new Titan21\SportingInfluence\Shortcodes\CalendarShortcode();
 $bookingformshortcode = new Titan21\SportingInfluence\Shortcodes\BookingFormShortcode();
 new Titan21\SportingInfluence\Ajax\CartAjax($bookingformshortcode);
@@ -22,6 +27,13 @@ const WOOCOMMERCE_TEMPLATE_LOCATION = WP_PLUGIN_DIR."/sportinginfluence/woocomme
 
 add_action('wp_enqueue_scripts', function()
 {
+    global $post;
+    if(has_shortcode($post->post_content, 'sportinginfluence_booking'))
+    {
+        wp_register_style('calendar', get_template_directory_uri().'/styles/calendar.css');
+        wp_enqueue_style('calendar');
+    }
+
     if(is_front_page())
     {
         wp_enqueue_style('homepage-grid', get_template_directory_uri().'/styles/homepage.css');

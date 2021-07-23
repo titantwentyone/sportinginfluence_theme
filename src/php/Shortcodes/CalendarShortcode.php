@@ -8,7 +8,7 @@ class CalendarShortcode
 {
     public function __construct()
     {
-        add_action('wp_enqueue_scripts', [$this, 'enqueue_style']);
+        //add_action('wp_enqueue_scripts', [$this, 'enqueue_style']);
         add_shortcode('sportinginfluence_calendar', [$this, 'display_calendar'], 10, 3);  
     }
 
@@ -26,11 +26,13 @@ class CalendarShortcode
 
     public function enqueue_style()
     {
+        /*
         global $post;
         if(has_shortcode(get_post_meta($post->ID, 'ct_builder_shortcodes', true), 'sportinginfluence_calendar') || $post->ID == 28)
         {
-            wp_register_style('calendar', WP_PLUGIN_URL.'/sportinginfluence/dist/css/calendar.min.css');
-            wp_enqueue_style('calendar');
+            //wp_register_style('calendar', WP_PLUGIN_URL.'/sportinginfluence/dist/css/calendar.min.css');
+            //wp_enqueue_style('calendar');
         }
+        */
     }
 }
