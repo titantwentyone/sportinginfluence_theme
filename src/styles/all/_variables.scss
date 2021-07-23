@@ -1,0 +1,30 @@
+$red: #ff321d;
+$red-dark: #f51700;
+$red-light: #ff5644;
+$cyan: #1deaff;
+$purple: #e838e4;
+$green: #72d701;
+$green-dark: #5db001;
+$green-light: #87fe01;
+$yellow: #ffd401;
+
+$schools: $red;
+$policies: $cyan;
+$vacancies: $purple;
+$foundation: $green;
+$camps: $yellow;
+
+:root
+{
+    --red: #{$red};
+    --cyan: #{$cyan};
+    --purple: #{$purple};
+    --green: #{$green};
+    --yellow: #{$yellow};
+
+    --schools: #{$red};
+    --policies: #{$cyan};
+    --vacancies: #{$purple};
+    --foundation: #{$green};
+    --camps: #{$yellow};
+}

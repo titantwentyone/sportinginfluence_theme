@@ -1,0 +1,63 @@
+@import './variables.scss';
+
+.button, button
+{
+    background-color: $schools !important;
+    width:auto !important;
+    padding:10px 20px !important;
+    border-radius:10px !important;
+    position:relative !important;
+    margin:auto !important;
+    text-decoration:none !important;
+    text-transform:uppercase !important;
+    font-family: 'Quicksand', sans-serif !important;
+    color:white !important;
+    border:0 !important;
+
+    a
+    {
+        text-decoration:none;
+        color:white;
+    }
+
+
+
+    .page-template-templ-homepage &
+    {
+
+        span
+        {
+            z-index:2;
+            position:relative;
+        }
+
+        &::before
+        {
+            content:'';
+            width:0%;
+            height:100%;
+            background-color:white;
+            position:absolute;
+            left:0;
+            top:0;
+            border-radius:10px;
+            transition:0.1s width ease-in;
+
+        }
+
+        &:hover
+        {
+            color: $red !important;
+
+            &::before
+            {
+                width:100%;
+            }
+
+            span
+            {
+                color:white;
+            }
+        }
+    }
+}

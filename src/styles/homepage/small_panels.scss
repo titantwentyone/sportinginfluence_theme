@@ -1,0 +1,193 @@
+@use '../all/variables';
+
+$panel_opacity: 0.7;
+
+#activity_camps
+{
+    &::after
+    {
+        background-color:rgba(variables.$camps, $panel_opacity);
+    }
+
+    &::before
+    {
+        background-image:url(https://picsum.photos/560/280?random=1);
+    }
+
+    .popout
+    {
+        //background-color:$camps;
+        background-image:url(https://picsum.photos/560/280?random=1);
+
+        .popout_button
+        {
+            color:var(--camps) !important;
+        }
+
+        &::after
+        {
+            background:linear-gradient(45deg, var(--camps) 50%, transparent 50%);
+            
+        }
+    }
+
+    .button
+    {
+        &::before
+        {
+            background-color:var(--camps);
+        }
+    }
+}
+
+#after_school_clubs
+{
+    &::after
+    {
+        background-color:rgba(variables.$schools, $panel_opacity);
+    }
+
+    &::before
+    {
+        background-image:url(https://picsum.photos/560/280?random=1);
+    }
+
+    .popout
+    {
+        //background-color:$camps;
+        background-image:url(https://picsum.photos/560/280?random=1);
+
+        .popout_button
+        {
+            color:var(--schools)  !important;
+        }
+
+        &::after
+        {
+            background:linear-gradient(45deg, var(--schools) 50%, transparent 50%);
+            
+        }
+    }
+
+    .button
+    {
+        &::before
+        {
+            background-color:var(--schools);
+        }
+    }
+}
+
+#your_account
+{
+    &::after
+    {
+        background-color:rgba(variables.$policies, $panel_opacity);
+    }
+
+    &::before
+    {
+        background-image:url(https://picsum.photos/560/280?random=1);
+    }
+
+    .popout
+    {
+        //background-color:$camps;
+        background-image:url(https://picsum.photos/560/280?random=1);
+
+        .popout_button
+        {
+            color:var(--policies)  !important;
+        }
+
+        &::after
+        {
+            background:linear-gradient(45deg, var(--policies) 50%, transparent 50%);
+            
+        }
+    }
+
+    .button
+    {
+        &::before
+        {
+            background-color:var(--policies);
+        }
+    }
+}
+
+#about_us
+{
+    &::after
+    {
+        background-color:rgba(variables.$vacancies, $panel_opacity);
+    }
+
+    &::before
+    {
+        background-image:url(https://picsum.photos/560/280?random=1);
+    }
+
+    .popout
+    {
+        //background-color:$camps;
+        background-image:url(https://picsum.photos/560/280?random=1);
+
+        .popout_button
+        {
+            color:var(--vacancies)  !important;
+        }
+
+        &::after
+        {
+            background:linear-gradient(45deg, var(--vacancies) 50%, transparent 50%);
+            
+        }
+    }
+
+    .button
+    {
+        &::before
+        {
+            background-color:var(--vacancies);
+        }
+    }
+}
+
+#foundation
+{
+    &::after
+    {
+        background-color:rgba(variables.$foundation, 0.3);
+    }
+
+    &::before
+    {
+        background-image:url(https://picsum.photos/560/280?random=1);
+    }
+
+    .popout
+    {
+        //background-color:$camps;
+        background-image:url(https://picsum.photos/560/280?random=1);
+
+        .popout_button
+        {
+            color:var(--foundation)  !important;
+        }
+
+        &::after
+        {
+            background:linear-gradient(45deg, var(--foundation) 50%, transparent 50%);
+            
+        }
+    }
+
+    .button
+    {
+        &::before
+        {
+            background-color:var(--foundation);
+        }
+    }
+}

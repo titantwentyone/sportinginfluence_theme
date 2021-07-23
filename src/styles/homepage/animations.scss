@@ -1,0 +1,149 @@
+//animations
+@mixin from_right()
+{
+    .popout
+    {
+        right:-100%;
+        transition:0.3s ease-in all;
+    }
+
+    &:hover
+    {
+        .popout
+        {
+            right:0%;
+            //transform:scale(1.1);
+            z-index:10;
+        }
+    }
+}
+
+@mixin from_left
+{
+    .popout
+    {
+        left:-100%;
+        transition:0.3s ease-in all;
+    }
+
+    &:hover
+    {
+        .popout
+        {
+            left:0%;
+            //transform:scale(1.1);
+            z-index:10;
+        }
+    }
+}
+
+@mixin from_bottom
+{
+    .popout
+    {
+        bottom:-100%;
+        transition:0.3s ease-in all;
+    }
+
+    &:hover
+    {
+        .popout
+        {
+            bottom:0%;
+            //transform:scale(1.1);
+            z-index:10;
+        }
+    }
+}
+
+@mixin from_top
+{
+    .popout
+    {
+        top:-100%;
+        transition:0.3s ease-in all;
+    }
+
+    &:hover
+    {
+        .popout
+        {
+            top:0%;
+            //transform:scale(1.1);
+            z-index:10;
+        }
+    }
+}
+
+#activity_camps
+{
+    @media screen and (min-width:1025px)
+    {
+        @include from_top();
+        @include from_right();
+    }
+
+    @media screen and (max-width:1024px)
+    {
+        @include from_left();
+    }
+}
+
+#after_school_clubs
+{
+    @include from_right();
+}
+
+#your_account
+{
+    @media screen and (min-width:1025px)
+    {
+        @include from_bottom();
+        @include from_left();
+    }
+
+    @media screen and (max-width:1024px)
+    {
+        @include from_right();
+    }
+}
+
+#about_us
+{
+    @media screen and (min-width:1025px)
+    {
+        @include from_bottom();
+    }
+
+    @media screen and (max-width:1024px) and (min-width:769px)
+    {
+        @include from_bottom();
+        @include from_right();
+    }
+
+    @media screen and (max-width:768px)
+    {
+        @include from_left();
+    }
+}
+
+#foundation
+{
+    @media screen and (min-width:1025px)
+    {
+        @include from_bottom();
+        @include from_right();
+    }
+
+    @media screen and (max-width:1024px) and (min-width:769px)
+    {
+        @include from_bottom();
+        @include from_left();
+    }
+
+    @media screen and (max-width:768px)
+    {
+        @include from_left();
+    }
+    
+}

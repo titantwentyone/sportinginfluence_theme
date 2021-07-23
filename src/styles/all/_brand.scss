@@ -1,0 +1,44 @@
+@use "variables";
+
+.brand
+{
+    display:flex;
+    flex-direction:column;
+    text-align:center;
+    padding:30px;
+    box-sizing:border-box;
+
+    .logo
+    {
+        background: linear-gradient(variables.$red-light 50%, variables.$red-dark);
+        border-radius:100%;
+        min-width:100px;
+        min-height:100px;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        color:black;
+        text-decoration:none;
+        
+        span
+        {
+            font-family: 'Oswald', sans-serif;
+            font-size:56px;
+        }
+    }
+
+    .text
+    {
+        h1
+        {
+            text-transform:uppercase;
+            margin: 10px 0;
+            font-size:48px;
+        }
+
+        span
+        {
+            font-size: 24px;
+        }
+    }
+}

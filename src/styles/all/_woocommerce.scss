@@ -1,0 +1,27 @@
+.woocommerce-MyAccount-navigation ul
+{
+    list-style: none;
+    padding:0px;
+    margin:0px;
+
+    li
+    {
+        padding:0px !important;
+
+        &.is-active
+        {
+            a
+            {
+                background-color: $red !important;
+            }
+        }
+
+        a
+        {
+            @extend .button;
+            display:block;
+            background-color: grey !important;
+            display:block;
+        }
+    }
+}

@@ -1,0 +1,162 @@
+@use 'all/all';
+
+/* 2. Include any default variable overrides here */
+$headings-font-family: 'Quicksand', sans-serif;
+$headings-font-weight: 600;
+
+$theme-colors: (
+  "purple":     all.$purple,
+  "red":        all.$red,
+  "yellow":     all.$yellow,
+  "green":      all.$green,
+  "cyan":       all.$cyan,
+  "white":      #fff,
+  //"gray":       $gray-600,
+  //"gray-dark":  $gray-800
+);
+
+$theme-colors: (
+  "primary":    all.$red,
+  "secondary":  all.$yellow,
+  "schools":    all.$schools,
+  "camps":      all.$camps
+);
+
+@import "~bootstrap/scss/bootstrap";
+
+h1, h2, h3, h4, h5, h6
+{
+    text-transform:uppercase;
+}
+
+header
+{
+    z-index: 2;
+    position: sticky;
+
+    &.oc
+    {
+        @extend .bg-transparent;
+        position:fixed;
+
+        .social
+        {
+            a
+            {
+                color:white;
+            }
+        }
+
+        .flash
+        {
+            display:none;
+        }
+
+        .menu span i:first-child
+        {
+            @extend .text-white;
+        }
+
+        .menu span i + i
+        {
+            @extend .text-primary;
+        }
+
+        #toggle span span
+        {
+            @extend .bg-primary;
+        }
+    }
+
+    .social
+    {
+        a
+        {
+            color: all.$red;
+        }
+    }
+
+    .brand
+    {
+        @extend .ps-0;
+        flex-direction:row;
+        align-items:center;
+
+        @include media-breakpoint-down(lg)
+        {
+            .text
+            {
+                h1
+                {
+                    font-size:32px;
+                }
+
+                span
+                {
+                    display:none;
+                }
+            }
+        }
+
+        @include media-breakpoint-down(sm)
+        {
+            .text
+            {
+                display:none;
+            }
+        }
+
+        .text
+        {
+            @extend .ms-2;
+
+            text-align:left;
+
+            h1
+            {
+                @extend .mb-0;
+            }
+        }
+    }
+
+    .menu
+    {
+        @include media-breakpoint-down(sm)
+        {
+            span
+            {
+                font-size:24px;
+            }
+        }
+    }
+
+    .flash
+    {
+        width:50%;
+        z-index:-1;
+    
+        @include media-breakpoint-down(sm)
+        {
+            //display:none;
+        }
+    
+        .flash_image
+        {
+            z-index: -1;
+            filter:grayscale(100%);
+        }
+    }
+}
+
+#offcanvas
+{
+    left:-100%;
+    transition: 0.3s left ease-out;
+    position:fixed;
+    top:0;
+
+    &.open
+    {
+        left:0%;
+    }
+}
