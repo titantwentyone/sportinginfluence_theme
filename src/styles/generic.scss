@@ -1,4 +1,7 @@
 @use 'all/all';
+@use 'all/variables';
+
+@use 'homepage/_homepage';
 
 /* 2. Include any default variable overrides here */
 $headings-font-family: 'Quicksand', sans-serif;
@@ -27,12 +30,15 @@ $theme-colors: (
 h1, h2, h3, h4, h5, h6
 {
     text-transform:uppercase;
+    font-size:normal;
 }
 
+/**
+ * Header
+ */
 header
 {
     z-index: 2;
-    position: sticky;
 
     &.oc
     {
@@ -160,3 +166,91 @@ header
         left:0%;
     }
 }
+
+/**
+ *Booking
+ */
+.swiper-container-initialized
+{
+    overflow:hidden;
+}
+
+.swiper-slide
+{
+    @extend .p-3;
+}
+
+.product_options
+{
+    .product_option
+    {
+        border: 1px solid variables.$red !important;
+        background-color:white !important;
+        color: $red !important;
+        box-sizing:border-box;
+
+        &:hover
+        {
+            background-color:variables.$red !important;
+            color:white !important;
+        }
+
+        &.in_cart
+        {
+            background-color:variables.$red !important;
+            color:white !important;
+            border:none !important;
+        }
+
+        &.swap_in_cart
+        {
+            background-color:grey !important;
+            color:white !important;
+            border:none !important;
+        }
+
+        &.original_order
+        {
+            background-color:black !important;
+            color:white !important;
+            border:none !important;
+        }
+
+        &.in_order
+        {
+            background-color: $purple !important;
+            color:white !important;
+            border:none !important;
+        }
+
+        &.swapped_in_order
+        {
+            background-color:$yellow !important;
+        }
+    }
+}
+
+/**
+ * Activity Camps
+ */
+
+ .eventday, .facilty
+ {
+     min-height:300px;
+
+     &::after
+     {
+         content:'';
+         position:absolute;
+         left:0;
+         top:0;
+         width:100%;
+         height:100%;
+         background-color:rgba(0,0,0,0.5);
+     }
+ }
+
+ .activity
+ {
+     min-height:300px;
+ }

@@ -11,18 +11,17 @@ class BookingFormShortcode
     public function __construct()
     {
 
-        add_action('wp_enqueue_scripts', [$this, 'enqueue_scripts']);
 
-        //swiper
-
-
-        //shortcode
-        add_shortcode('sportinginfluence_booking', [$this, 'display_booking'], 10, 3);
+        add_filter('ec_day_classes', function($classes, $day, $month, $year)
+        {
+            $classes[] ='justify-content-between';
+            return $classes;
+        }, 1, 4);
 
 
     }
 
-    public function display_booking($atts, $content, $tag)
+    public function display_booking()
     {
         $children = ChildData::get_current_users_children();
 
@@ -30,26 +29,20 @@ class BookingFormShortcode
         $this->displayChildrenTabContent($children);
     }
 
-    public function displayChildrenTabs($children)
+    public static function displayChildrenTabs($children)
     {
-        echo "<div class='tablinks_container children'>";
-            echo "<div class='tablinks'>";
-
-            foreach($children as $index => $child)
-            {
-                echo "<a class='tab child button' data-index='{$index}' href='#{$child->ID}'>{$child->post_title}</a>";
-            }
-
-            echo "</div>";
-        echo "</div>";
-
-        $this->displaySeasonTabs();
-
+        ?>
+        <div class='d-flex justify-content-center my-2'>
+            <?php foreach($children as $index => $child): ?>
+                <a class='button mx-3' data-index='<?php echo $index ?>' href='#<?php echo $child->ID ?>'><?php echo $child->post_title ?></a>
+            <?php endforeach; ?>
+        </div>
+        <?php
     }
 
-    public function displayChildrenTabContent($children)
+    public static function displayChildrenTabContent($children)
     {
-        echo "<div class='swiper-container-children'>";
+        echo "<div class='swiper-container-children p-0'>";
             echo "<div class='swiper-wrapper'>";
 
             foreach($children as $child)
@@ -62,31 +55,25 @@ class BookingFormShortcode
         echo "</div>";
     }
 
-    public function displaySeasonTabs()
+    public static function displaySeasonTabs($seasons)
     {
-        $active_seasons = rwmb_meta('active_seasons', ['object_type' => 'setting'], 'site-settings');
-        
-        echo "<div class='tablinks_container seasons'>";
-        echo "<div class='tablinks'>";
+        ?>
+            <div class='d-flex justify-content-center my-2'>
+            <?php
+            $tab_index = 0;
+            foreach($seasons as $index => $active_season):
 
-        $tab_index = 0;
-        foreach($active_seasons as $index => $active_season)
-        {
-            //dont display tab if no events
-            
-
-            if(EventData::get_count_of_posts_in_this_season($active_season) == 0)
+            if(\Titan21\SportingInfluence\Data\EventData::get_count_of_posts_in_this_season($active_season) == 0)
             {
                 continue;
             }
-
-            echo "<a class='tab season button' data-index='{$tab_index}' href='#{$active_season->slug}'>{$active_season->name}</a>";
-
-            $tab_index++;
-        }
-
-        echo "</div>";
-        echo "</div>";
+            ?>
+                <a class='tab season button' data-index='<?php echo $tab_index ?>' href='#<?php echo $active_season->slug ?>'><?php echo $active_season->name ?></a>
+                <?php $tab_index++ ?>
+            <?php endforeach; ?>
+        </div>
+           <!-- echo "</div>"; -->
+        <?php
     }
 
     public function displaySeasonTabContent($child)
@@ -98,7 +85,6 @@ class BookingFormShortcode
 
         foreach($active_seasons as $active_season)
         {
-
             if(!ChildData::is_child_age_valid($child))
             {
                 echo "<div class='tabcontent swiper-slide' data-hash='{$active_season->slug}' data-season='$active_season->slug'>";
@@ -173,15 +159,15 @@ class BookingFormShortcode
 
     }
 
-    public function display_options($event_product, $child)
+    public static function display_options($event_product, $child)
     {
         $event_product = wc_get_product($event_product);
 
         $available_variations = $event_product->get_available_variations();
 
-        echo "<div class='product_options'>";
+        echo "<div class='product_options d-flex flex-column'>";
 
-        if(EventData::has_event_expired(($event_product->get_id())))
+        if(\Titan21\SportingInfluence\Data\EventData::has_event_expired(($event_product->get_id())))
         {
             echo "<p>Sorry. You're too late to book this session.</p>";
         }
@@ -189,11 +175,18 @@ class BookingFormShortcode
         {
             foreach($available_variations as $variation)
             {
-                $this->get_add_to_cart_variation_button($variation, $child);
+                self::get_add_to_cart_variation_button($variation, $child);
+
             }
 
             //echo "<a class='book_session_group'>Book The Week</a>";
-            $this->display_book_session_group_button($event_product->get_id(), $child->ID);
+            //$this->display_book_session_group_button($event_product->get_id(), $child->ID);
+
+            if(has_term(null, 'session_group', $event_product->get_id()) && get_post_meta($event_product->get_id(), 'default_variation', true) != "notselected")
+            {
+                $session_group = wp_get_post_terms($event_product->get_id(), 'session_group')[0];
+                echo "<a class='book_session_group button mt-2 w-100' data-sessiongroup='{$session_group->term_id}' data-childid='{$child->ID}'>Book The Week</a>";
+            }
         }
 
         echo "</div>";
@@ -208,7 +201,7 @@ class BookingFormShortcode
         }
     }
 
-    public function get_add_to_cart_variation_button($variation, $child)
+    public static function get_add_to_cart_variation_button($variation, $child)
     {
         $classes = [];
 
@@ -217,25 +210,25 @@ class BookingFormShortcode
         $product_id = wp_get_post_parent_id($variation['variation_id']);
 
         //if the variation and child is in the basket
-        if(CartHelper::matched_cart_items( $variation['variation_id'], $child->ID ))
+        if(\Titan21\SportingInfluence\Helpers\CartHelper::matched_cart_items( $variation['variation_id'], $child->ID ))
         {
             $classes[] = "in_cart";
             $action = "remove_from_cart";
         }
-        else if(CartHelper::matched_cart_items( $product_id, $child->ID ))
+        else if(\Titan21\SportingInfluence\Helpers\CartHelper::matched_cart_items( $product_id, $child->ID ))
         {
             $classes[] = "swap_in_cart";
             $action = "swap_in_cart";
         }
 
         //original order but amendment present
-        else if(CartHelper::has_already_ordered($product_id, $child->ID, $variation['variation_id']) && CartHelper::has_amendment_in_cart($product_id, $child->ID))
+        else if(\Titan21\SportingInfluence\Helpers\CartHelper::has_already_ordered($product_id, $child->ID, $variation['variation_id']) && \Titan21\SportingInfluence\Helpers\CartHelper::has_amendment_in_cart($product_id, $child->ID))
         {
             $classes[] = "original_order";
             $action = "reset_swap";
         }
         //proposed change to order
-        else if(CartHelper::has_already_ordered($product_id, $child->ID) && CartHelper::has_amendment_in_cart($product_id, $child->ID, $variation['variation_id']))
+        else if(\Titan21\SportingInfluence\Helpers\CartHelper::has_already_ordered($product_id, $child->ID) && \Titan21\SportingInfluence\Helpers\CartHelper::has_amendment_in_cart($product_id, $child->ID, $variation['variation_id']))
         {
             $classes[] = "swapped_in_order";
             $action = "reset_swap";
@@ -243,13 +236,13 @@ class BookingFormShortcode
 
 
         //already ordered
-        else if(CartHelper::has_already_ordered($product_id, $child->ID, $variation['variation_id']))
+        else if(\Titan21\SportingInfluence\Helpers\CartHelper::has_already_ordered($product_id, $child->ID, $variation['variation_id']))
         {
             $classes[] = "in_order";
             $action = "reset_swap";
         }
         //already ordered but not this variation
-        else if(CartHelper::has_already_ordered($product_id, $child->ID))
+        else if(\Titan21\SportingInfluence\Helpers\CartHelper::has_already_ordered($product_id, $child->ID))
         {
             $classes[] = "swap_in_order";
             $action = "swap_in_order";
@@ -272,7 +265,7 @@ class BookingFormShortcode
         $classes = implode(" ", $classes);
 
 
-        echo "<a class='product_option {$classes}' data-childid='{$child->ID}' data-variationid='{$variation['variation_id']}' data-action='{$action}' {$data_session_group}>";
+        echo "<a class='d-flex flex-row product_option button w-100 mt-2 justify-content-between {$classes}' data-childid='{$child->ID}' data-variationid='{$variation['variation_id']}' data-action='{$action}' {$data_session_group}>";
             echo "<div class='option_name'>";
             echo implode(" - ", $variation['attributes']);
             echo "</div>";
@@ -285,6 +278,7 @@ class BookingFormShortcode
 
     public function enqueue_scripts()
     {
+        /*
         wp_register_script('booking_form',WP_PLUGIN_URL.'/sportinginfluence/dist/js/booking_form.min.js', ['jquery'], false, true);
         wp_localize_script( 'booking_form', 'ajax_object', ['ajax_url' => admin_url( 'admin-ajax.php' )]);
         wp_register_style('booking_form_css',WP_PLUGIN_URL.'/sportinginfluence/dist/css/booking_form_css.min.css');
@@ -299,5 +293,6 @@ class BookingFormShortcode
             wp_enqueue_script('swiper');
             wp_enqueue_style('swiper');
         }
+        */
     }
 }

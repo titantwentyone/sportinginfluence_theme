@@ -4,13 +4,16 @@ const RemoveEmptyScriptsPlugin = require('webpack-remove-empty-scripts');
 const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
+    devtool: 'source-map',
     entry: {
         //main: './index.js',
         homepage: { import: './src/styles/homepage.scss'},
         generic: { import: './src/styles/generic.scss'},
         calendar: { import: './src/styles/calendar.scss'},
-        offcanvas: { import: './src/js/offcanvas.js'}
+        booking_css: { import: './src/styles/booking.scss'},
+        offcanvas: { import: './src/js/offcanvas.js'},
+        booking: { import: './src/js/booking.js'}
     },
     target: 'web',
     

@@ -28,10 +28,14 @@ const WOOCOMMERCE_TEMPLATE_LOCATION = WP_PLUGIN_DIR."/sportinginfluence/woocomme
 add_action('wp_enqueue_scripts', function()
 {
     global $post;
-    if(has_shortcode($post->post_content, 'sportinginfluence_booking'))
+    if(is_page_template('templ-booking.php'))
     {
         wp_register_style('calendar', get_template_directory_uri().'/styles/calendar.css');
         wp_enqueue_style('calendar');
+
+        wp_register_script('booking', get_template_directory_uri().'/js/booking.js', ['jquery'], false, false);
+        wp_localize_script('booking', 'ajax_object', ['ajax_url' => admin_url( 'admin-ajax.php' )]);
+        wp_enqueue_script('booking');
     }
 
     if(is_front_page())
@@ -40,7 +44,10 @@ add_action('wp_enqueue_scripts', function()
     }
     else
     {
-        wp_enqueue_style('generic', get_template_directory_uri().'/styles/generic.css');
-        wp_enqueue_script('offcanvas', get_template_directory_uri().'/js/offcanvas.js', ['jquery'], false, true);
+        //wp_enqueue_style('generic', get_template_directory_uri().'/styles/generic.css');
+        //wp_enqueue_script('offcanvas', get_template_directory_uri().'/js/offcanvas.js', ['jquery'], false, true);
     }
+
+    wp_enqueue_style('generic', get_template_directory_uri().'/styles/generic.css');
+    wp_enqueue_script('offcanvas', get_template_directory_uri().'/js/offcanvas.js', ['jquery'], false, true);
 });
