@@ -180,6 +180,16 @@ header
     @extend .p-3;
 }
 
+.tab
+{
+    background-color:grey !important;
+
+    &.active
+    {
+        background-color: variables.$red !important;
+    }
+}
+
 .product_options
 {
     .product_option

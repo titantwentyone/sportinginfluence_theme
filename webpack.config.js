@@ -11,7 +11,6 @@ module.exports = {
         homepage: { import: './src/styles/homepage.scss'},
         generic: { import: './src/styles/generic.scss'},
         calendar: { import: './src/styles/calendar.scss'},
-        booking_css: { import: './src/styles/booking.scss'},
         offcanvas: { import: './src/js/offcanvas.js'},
         booking: { import: './src/js/booking.js'}
     },

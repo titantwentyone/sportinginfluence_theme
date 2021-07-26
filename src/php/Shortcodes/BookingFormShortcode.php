@@ -34,7 +34,7 @@ class BookingFormShortcode
         ?>
         <div class='d-flex justify-content-center my-2'>
             <?php foreach($children as $index => $child): ?>
-                <a class='button mx-3' data-index='<?php echo $index ?>' href='#<?php echo $child->ID ?>'><?php echo $child->post_title ?></a>
+                <a class='child tab button mx-3' data-index='<?php echo $index ?>' href='#<?php echo $child->ID ?>'><?php echo $child->post_title ?></a>
             <?php endforeach; ?>
         </div>
         <?php
@@ -68,7 +68,7 @@ class BookingFormShortcode
                 continue;
             }
             ?>
-                <a class='tab season button' data-index='<?php echo $tab_index ?>' href='#<?php echo $active_season->slug ?>'><?php echo $active_season->name ?></a>
+                <a class='tab season button mx-3' data-index='<?php echo $tab_index ?>' href='#<?php echo $active_season->slug ?>'><?php echo $active_season->name ?></a>
                 <?php $tab_index++ ?>
             <?php endforeach; ?>
         </div>
@@ -165,7 +165,7 @@ class BookingFormShortcode
 
         $available_variations = $event_product->get_available_variations();
 
-        echo "<div class='product_options d-flex flex-column'>";
+        echo "<div class='product_options d-flex flex-column h-100 justify-content-end'>";
 
         if(\Titan21\SportingInfluence\Data\EventData::has_event_expired(($event_product->get_id())))
         {
@@ -192,6 +192,7 @@ class BookingFormShortcode
         echo "</div>";
     }
 
+    /*
     private function display_book_session_group_button($product_id, $child_id)
     {
         if(has_term(null, 'session_group', $product_id) && get_post_meta($product_id, 'default_variation', true) != "notselected")
@@ -200,6 +201,7 @@ class BookingFormShortcode
             echo "<a class='book_session_group' data-sessiongroup='{$session_group->term_id}' data-childid='{$child_id}'>Book The Week</a>";
         }
     }
+    */
 
     public static function get_add_to_cart_variation_button($variation, $child)
     {
@@ -265,7 +267,7 @@ class BookingFormShortcode
         $classes = implode(" ", $classes);
 
 
-        echo "<a class='d-flex flex-row product_option button w-100 mt-2 justify-content-between {$classes}' data-childid='{$child->ID}' data-variationid='{$variation['variation_id']}' data-action='{$action}' {$data_session_group}>";
+        echo "<a class='d-flex flex-row product_option button w-100 m-0 mt-1 justify-content-between {$classes}' data-childid='{$child->ID}' data-variationid='{$variation['variation_id']}' data-action='{$action}' {$data_session_group}>";
             echo "<div class='option_name'>";
             echo implode(" - ", $variation['attributes']);
             echo "</div>";

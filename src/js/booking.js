@@ -35,7 +35,7 @@ docReady(function() {
         }
     });
 
-    const Swiper = new window.Swiper('.swiper-container-children', {
+    new window.Swiper('.swiper-container-children', {
         observer: true,
         observeParents: true,
         hashNavigation: {
