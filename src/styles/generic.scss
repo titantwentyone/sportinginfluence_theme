@@ -839,3 +839,97 @@ header
  {
      z-index:3;
  }
+
+ /**
+ * home.php
+ */
+
+body.blog
+{
+    .posts
+    {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 2rem;
+        row-gap: 2rem;
+
+        @include media-breakpoint-down(lg)
+        {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        @include media-breakpoint-down(md)
+        {
+            grid-template-columns: minmax(0, 1fr);
+
+            .post
+            {
+                &:first-child
+                {
+                    background-color:white;
+                }
+            }
+        }
+
+        .wp-post-image
+        {
+            width:100%;
+            height:auto;
+        }
+
+        > div:last-child
+        {
+            text-align:center;
+            grid-column: 1 / span 3;
+
+            @include media-breakpoint-down(lg)
+            {
+                grid-column: 1 / span 2;
+            }
+
+            @include media-breakpoint-down(md)
+            {
+                grid-column: 1 / span 1;
+            }
+
+            justify-content: center;
+
+            a, span
+            {
+                display:flex;
+                width:20px;
+                height:20px;
+                background-color:grey;
+                color:white;
+                align-items:center;
+                justify-content:center;
+                padding:20px;
+                border-radius:100%;
+                text-decoration: none;
+                margin:0 7px;
+
+                &.current, &.next, &.prev
+                {
+                    background-color:variables.$red;
+                }
+
+                @include media-breakpoint-down(sm)
+                {
+                    &.page-numbers:not(.prev):not(.next)
+                    {
+                        display:none;
+                    }
+                }
+
+            }
+        }
+
+        .post
+        {
+            > img
+            {
+                width:100%;
+                height:auto;
+            }
+        }
+    }
+}

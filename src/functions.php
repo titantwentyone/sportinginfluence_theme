@@ -33,3 +33,9 @@ add_action('wp_enqueue_scripts', function()
     wp_localize_script('main', 'ajax_object', ['ajax_url' => admin_url( 'admin-ajax.php' )]);
     wp_enqueue_script('main');
 });
+
+function new_excerpt_more($more) {
+    global $post;
+ return '<br/><br/><div class="d-flex justify-content-center"><a class="button" href="'. get_permalink($post->ID) . '">Read More</a></div>';
+}
+add_filter('excerpt_more', 'new_excerpt_more');
