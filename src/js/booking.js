@@ -22,32 +22,52 @@ docReady(function() {
         jQuery('.tab.season[data-index="' + swp.activeIndex + '"]').addClass('active');
     }
 
-    new window.Swiper('.swiper-container-seasons', {
-        observer: true,
-        observeParents: true,
-        hashNavigation: {
-            replaceState: true,
-            watchState:true
-        },
-        on: {
-            activeIndexChange: highlightSeasonTab,
-            init: highlightSeasonTab
-        }
-    });
+    const seasonSwiperElement = document.querySelector('.swiper-container-seasons');
 
-    new window.Swiper('.swiper-container-children', {
-        observer: true,
-        observeParents: true,
-        hashNavigation: {
-            replaceState: true,
-            watchState:true
-        },
-        on: {
-            activeIndexChange: highlightChildTab,
-            init: highlightChildTab
-        },
-        allowTouchMove:false
-    });
+    if(seasonSwiperElement)
+    {
+        const season_swiper = new Swiper('.swiper-container-seasons', {
+            observer: true,
+            observeParents: true,
+            hashNavigation: {
+                replaceState: true,
+                watchState:true
+            },
+            autoHeight: true,
+            on: {
+                activeIndexChange: highlightSeasonTab,
+                init: highlightSeasonTab
+            }
+        });
+    }
+
+    const childrenSwiperElement = document.querySelector('.swiper-container-children');
+
+    if(childrenSwiperElement)
+    {
+        const child_swiper = new Swiper('.swiper-container-children', {
+            observer: true,
+            observeParents: true,
+            hashNavigation: {
+                replaceState: true,
+                watchState:true
+            },
+            on: {
+                activeIndexChange: highlightChildTab,
+                init: highlightChildTab
+            },
+            allowTouchMove:false
+        });
+    }
+
+    const selectElement = document.querySelector('.child.select');
+    
+    if(selectElement)
+    {
+        selectElement.addEventListener('change', (event) => {
+            child_swiper.slideTo(event.target.value);
+        });
+    }
 });
 
 jQuery(document).ready(function()

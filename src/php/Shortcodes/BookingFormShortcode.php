@@ -21,6 +21,7 @@ class BookingFormShortcode
 
     }
 
+    /*
     public function display_booking()
     {
         $children = ChildData::get_current_users_children();
@@ -28,6 +29,7 @@ class BookingFormShortcode
         $this->displayChildrenTabs($children);
         $this->displayChildrenTabContent($children);
     }
+    */
 
     public static function displayChildrenTabs($children)
     {
@@ -36,6 +38,12 @@ class BookingFormShortcode
             <?php foreach($children as $index => $child): ?>
                 <a class='child tab button mx-3' data-index='<?php echo $index ?>' href='#<?php echo $child->ID ?>'><?php echo $child->post_title ?></a>
             <?php endforeach; ?>
+
+            <select class='child select'>
+            <?php foreach($children as $index => $child): ?>
+                <option value='<?php echo $index ?>'><?php echo $child->post_title ?></option>
+            <?php endforeach; ?>
+            </select>
         </div>
         <?php
     }
@@ -76,6 +84,7 @@ class BookingFormShortcode
         <?php
     }
 
+    /*
     public function displaySeasonTabContent($child)
     {
         $active_seasons = rwmb_meta('active_seasons', ['object_type' => 'setting'], 'site-settings');
@@ -88,7 +97,7 @@ class BookingFormShortcode
             if(!ChildData::is_child_age_valid($child))
             {
                 echo "<div class='tabcontent swiper-slide' data-hash='{$active_season->slug}' data-season='$active_season->slug'>";
-                echo "<p>Sorry, your child is too young or too old to attend our sessions</p>";
+                echo "<p>Sorry, your child is too young or too old to attend our sessions.</p>";
                 echo "</div>";
                 continue;
             }
@@ -158,6 +167,7 @@ class BookingFormShortcode
         echo "</div>";
 
     }
+    */
 
     public static function display_options($event_product, $child)
     {
@@ -169,7 +179,7 @@ class BookingFormShortcode
 
         if(\Titan21\SportingInfluence\Data\EventData::has_event_expired(($event_product->get_id())))
         {
-            echo "<p>Sorry. You're too late to book this session.</p>";
+            echo "<p class='button'>Sorry. You're too late to book this session.</p>";
         }
         else
         {
@@ -185,7 +195,7 @@ class BookingFormShortcode
             if(has_term(null, 'session_group', $event_product->get_id()) && get_post_meta($event_product->get_id(), 'default_variation', true) != "notselected")
             {
                 $session_group = wp_get_post_terms($event_product->get_id(), 'session_group')[0];
-                echo "<a class='book_session_group button mt-2 w-100' data-sessiongroup='{$session_group->term_id}' data-childid='{$child->ID}'>Book The Week</a>";
+                echo "<a class='book_session_group button m-0 mt-1 w-100' data-sessiongroup='{$session_group->term_id}' data-childid='{$child->ID}'>Book The Week</a>";
             }
         }
 

@@ -1,3 +1,6 @@
+@import "~bootstrap/scss/bootstrap";
+
+
 //animations
 @mixin from_right()
 {
@@ -77,13 +80,13 @@
 
 #activity_camps
 {
-    @media screen and (min-width:1025px)
+    @include media-breakpoint-up(lg)
     {
         @include from_top();
         @include from_right();
     }
 
-    @media screen and (max-width:1024px)
+    @include media-breakpoint-down(lg)
     {
         @include from_left();
     }
@@ -96,13 +99,13 @@
 
 #your_account
 {
-    @media screen and (min-width:1025px)
+    @include media-breakpoint-up(lg)
     {
         @include from_bottom();
         @include from_left();
     }
 
-    @media screen and (max-width:1024px)
+    @include media-breakpoint-down(lg)
     {
         @include from_right();
     }
@@ -110,18 +113,18 @@
 
 #about_us
 {
-    @media screen and (min-width:1025px)
+    @include media-breakpoint-up(lg)
     {
         @include from_bottom();
     }
 
-    @media screen and (max-width:1024px) and (min-width:769px)
+    @include media-breakpoint-between(md, lg)
     {
         @include from_bottom();
         @include from_right();
     }
 
-    @media screen and (max-width:768px)
+    @include media-breakpoint-down(md)
     {
         @include from_left();
     }
@@ -129,19 +132,19 @@
 
 #foundation
 {
-    @media screen and (min-width:1025px)
+    @include media-breakpoint-up(lg)
     {
         @include from_bottom();
         @include from_right();
     }
 
-    @media screen and (max-width:1024px) and (min-width:769px)
+    @include media-breakpoint-between(md, lg)
     {
         @include from_bottom();
         @include from_left();
     }
 
-    @media screen and (max-width:768px)
+    @include media-breakpoint-down(md)
     {
         @include from_left();
     }

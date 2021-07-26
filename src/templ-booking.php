@@ -24,7 +24,7 @@ Template Name: Booking
                 'children' => $children,
                 'seasons' => $seasons]);
             ?>
-            <div class='container-fluid p-0'>
+            <div class='container-fluid p-0 overflow-hidden'>
                 <div class='row p-0 position-relative'>
 
                     <div class='swiper-container-children'>
@@ -93,7 +93,9 @@ Template Name: Booking
                                                 if($events_query->found_posts)
                                                 {
                                                     $event_product = $events_query->get_posts()[0];
-                                                    Titan21\SportingInfluence\Shortcodes\BookingFormShortcode::display_options($event_product, $child);
+                                                    $bookingform = new Titan21\SportingInfluence\Shortcodes\BookingFormShortcode();
+                                                    //Titan21\SportingInfluence\Shortcodes\BookingFormShortcode::display_options($event_product, $child);
+                                                    $bookingform->display_options($event_product, $child);
 
                                                 }
                                             }, 10, 3);

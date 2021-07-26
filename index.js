@@ -16,5 +16,6 @@
 
 //import './src/media/Site-Vid.mp4';
 
-//import './src/js/offcanvas.js';
+import './src/js/offcanvas.js';
+import './src/js/booking.js';
 

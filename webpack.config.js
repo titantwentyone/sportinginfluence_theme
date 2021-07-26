@@ -7,12 +7,12 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     entry: {
-        //main: './index.js',
-        homepage: { import: './src/styles/homepage.scss'},
+        main: './index.js',
+        //homepage: { import: './src/styles/homepage.scss'},
         generic: { import: './src/styles/generic.scss'},
-        calendar: { import: './src/styles/calendar.scss'},
-        offcanvas: { import: './src/js/offcanvas.js'},
-        booking: { import: './src/js/booking.js'}
+        //calendar: { import: './src/styles/calendar.scss'},
+        //offcanvas: { import: './src/js/offcanvas.js'},
+        //booking: { import: './src/js/booking.js'}
     },
     target: 'web',
     

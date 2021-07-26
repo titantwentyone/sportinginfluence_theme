@@ -4,7 +4,7 @@
         <?php wp_head(); ?>
         <?php get_template_part('parts/all', 'head'); ?>
     </head>
-
+home
     <body <?php body_class(); ?>>
         <div class='container-fluid p-0'>
             <?php get_header(); ?>

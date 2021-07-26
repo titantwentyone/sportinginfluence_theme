@@ -104,7 +104,7 @@ abstract class EventData
         //if today is after the event date, return
         $date = get_post_meta($product_id, 'event_date', true);
         $date   = \DateTime::createFromFormat('U', $date);
-        $now = new \DateTime();
+        $now = new \DateTime('now');
 
         if($now > $date)
         {
