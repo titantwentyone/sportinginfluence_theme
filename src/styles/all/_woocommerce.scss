@@ -1,3 +1,6 @@
+@use './variables';
+@use "./button";
+
 .woocommerce-MyAccount-navigation ul
 {
     list-style: none;
@@ -12,16 +15,21 @@
         {
             a
             {
-                background-color: $red !important;
+                background-color: variables.$red !important;
             }
         }
 
         a
         {
-            @extend .button;
+            @include button.button;
             display:block;
             background-color: grey !important;
             display:block;
         }
     }
+}
+
+.checkout-button
+{
+    font-size:24px !important;
 }

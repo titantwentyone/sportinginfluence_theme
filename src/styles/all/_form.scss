@@ -1,8 +1,10 @@
+@use '_variables';
+
 input, textarea, select
 {
     padding:10px;
-    border-radius:2px;
-    border:1px grey solid;
+    border-radius:10px;
+    border:1px variables.$red solid;
     background-color:white !important;
 }
 

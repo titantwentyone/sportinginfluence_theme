@@ -18,4 +18,5 @@
 
 import './src/js/offcanvas.js';
 import './src/js/booking.js';
+import './src/js/foundation.js';
 

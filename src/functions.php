@@ -39,3 +39,75 @@ function new_excerpt_more($more) {
  return '<br/><br/><div class="d-flex justify-content-center"><a class="button" href="'. get_permalink($post->ID) . '">Read More</a></div>';
 }
 add_filter('excerpt_more', 'new_excerpt_more');
+
+
+/*
+add_action('pre_get_posts', function($query)
+{
+    if(is_page_template('templ-foundationblog.php') && $query->is_main_query())
+    {
+        //echo "hello";
+        $query->set('post_type', 'post'); 
+        $query->set('posts_per_page', 11);
+        $query->set('tax_query', [
+            [
+                'taxonomy' => 'category',
+                'field' => 'slug',
+                'terms' => 'foundation'
+            ]
+        ]);
+        
+        $query->set( 'category_name', 'foundation' );
+        //print_r($query);
+    }
+}, 10, 1);
+*/
+
+/***********************************
+ Modifying foundation permalinks
+************************************/
+/**
+* Modify Permalinks for the Case Studies Category
+*
+* @author Nikki Stokes
+* @link https://measurewhatworks.com/
+*
+* @param string $permalink
+* @param array $post
+* @param array $leavename
+*/
+// Modify the individual case study post permalinks
+function nhs_custom_case_studies_permalink_post( $permalink, $post, $leavename ) {
+    // Get the categories for the post
+    $category = get_the_category($post->ID); 
+    if (  !empty($category) && $category[0]->cat_name == "Foundation" ) {
+        $permalink = trailingslashit( home_url('/foundation/news/'. $post->post_name . '/' ) );
+    }
+    return $permalink;
+}
+add_filter( 'post_link', 'nhs_custom_case_studies_permalink_post', 10, 3 );
+
+// Modify the "case studies" category archive permalink
+function nhs_custom_case_studies_permalink_archive( $permalink, $term, $taxonomy ){
+	// Get the category ID 
+	$category_id = $term->term_id;
+ 
+	// Check for desired category 
+	if( !empty( $category_id ) && $category_id == 38 ) {
+        $permalink = trailingslashit( home_url('/foundation/news/' ) );		
+	}
+
+	return $permalink;
+}
+add_filter( 'term_link', 'nhs_custom_case_studies_permalink_archive', 10, 3 );
+
+// Add rewrite rules so that WordPress delivers the correct content
+function nhs_custom_rewrite_rules( $wp_rewrite ) {
+    // This rule will will match the post name in /case-study/%postname%/ struture
+	$new_rules['^foundation/news/([^/]+)/?$'] = 'index.php?name=$matches[1]';
+	$new_rules['^foundation/news/?$'] = 'index.php?cat=38';
+	$wp_rewrite->rules = $new_rules + $wp_rewrite->rules;
+    
+	return $wp_rewrite;
+}
+add_action('generate_rewrite_rules', 'nhs_custom_rewrite_rules');

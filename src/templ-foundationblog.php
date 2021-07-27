@@ -1,3 +1,8 @@
+<?php
+/**
+ * Template Name: Foundation Blog
+ */
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -11,7 +16,7 @@
             <div class='container'>
                 <div class='p-5 posts d-grid'>
                     <div class='d-flex justify-content-center align-items-center bg-primary text-white'>
-                    <h1 class='text-center'>News</h1>
+                    <h1>News</h1>
                     </div>
                     <?php if(have_posts()) : ?>
                         <?php while(have_posts()) : the_post();?>

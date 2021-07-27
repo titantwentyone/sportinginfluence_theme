@@ -1,10 +1,10 @@
-@import '_mixins';
-@import '_reset';
-@import '_variables';
+@use '_mixins';
+@use '_reset';
+@use '_variables';
 
-@import '_brand';
-@import '_button';
-@import '_form';
+@use '_brand';
+@use '_button';
+@use '_form';
 
-@import '_woocommerce';
-@import '_wordpress';
+@use '_woocommerce';
+@use '_wordpress';

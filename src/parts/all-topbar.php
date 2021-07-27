@@ -1,5 +1,12 @@
 <?php
 $header_style = rwmb_meta('header_style');
+
+$header_style = $wp_query->query_vars['category_name'] == 'foundation' ? 'green' : $header_style;
+
+if(!is_home())
+{
+    $header_style = has_term('foundation', 'category') == 'foundation' ? 'green' : $header_style;
+}
 ?>
 
 <header class='position-sticky d-flex w-100 flex-column top-0 bg-white <?php echo $args['location'] ?> <?php echo $args['location'] == 'oc' ? '' : $header_style ?>'>

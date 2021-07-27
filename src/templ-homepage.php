@@ -132,7 +132,7 @@ Template Name: Homepage
                             Lorem ipsum dolor site amet
                         </span>
                         <div class='popout_buttons'>
-                            <a class='popout_button button'>
+                            <a class='popout_button button' href='/foundation'>
                                 <span>Read More <i class='fas fa-arrow-circle-right'></i></span>
                             </a>
                         </div>

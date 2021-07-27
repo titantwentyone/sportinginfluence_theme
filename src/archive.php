@@ -10,8 +10,9 @@
             <?php get_header(); ?>
             <div class='container'>
                 <div class='p-5 posts d-grid'>
-                    <div class='d-flex justify-content-center align-items-center bg-primary text-white'>
-                    <h1 class='text-center'>News</h1>
+                <?php //print_r($wp_query->query_vars['category_name'] ); ?>
+                    <div class='d-flex justify-content-center align-items-center <?php echo $wp_query->query_vars['category_name'] == 'foundation' ? 'bg-green' : 'bg-primary' ?> text-white'>
+                    <h1 class='text-center'><?php single_term_title(); ?></h1>
                     </div>
                     <?php if(have_posts()) : ?>
                         <?php while(have_posts()) : the_post();?>

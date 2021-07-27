@@ -1,5 +1,10 @@
 @import './variables.scss';
 
+@mixin button
+{
+    @extend .button;
+}
+
 .button, button
 {
     background-color: $schools !important;
@@ -20,6 +25,11 @@
     {
         text-decoration:none;
         color:white;
+    }
+
+    .category-foundation &
+    {
+        background-color: $foundation !important;
     }
 
 
